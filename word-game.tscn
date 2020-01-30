@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/word-game.gd" type="Script" id=1]
+[ext_resource path="res://gfx/blackboard.jpg" type="Texture" id=2]
+[ext_resource path="res://gfx/Feltpen.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://gfx/blue_button11.png" type="Texture" id=4]
+[ext_resource path="res://gfx/blue_button12.png" type="Texture" id=5]
+[ext_resource path="res://Node.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 3 )
+
+[node name="word-game" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="DisplayText" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_right = -24.0
+margin_bottom = -150.0
+rect_min_size = Vector2( 0, 400 )
+custom_fonts/font = SubResource( 1 )
+text = "textgame"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 479.0
+margin_right = 976.0
+margin_bottom = 552.0
+custom_constants/separation = 12
+alignment = 2
+
+[node name="PlayerInput" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_right = 764.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 776.0
+margin_right = 976.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 200, 73 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "enter"
+align = 1
+valign = 1
+
+[node name="StoryBook" type="Node" parent="."]
+
+[node name="Node0" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "vaardigheid", "voorwerp", "extra voorwerp", "nummer" )
+story = "ik ben goed met %s, maar het ligt allemaal aan de %s en niet aan de %s met de nummer %s"
+
+[node name="Node1" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "voorwerp dat je kan voelen", "voorwerp dat je kan voelen", "vorm van neerslag", "vorm van neerslag" )
+story = "Het leven draait om een %s, maar toch vind ik dat het om een %s draait. Daarnaast doucte in %s en in %s"
+
+[node name="Node2" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "dier", "dier", "smaak", "vorm van wel of niet" )
+story = "ik ben slimmer dan een %s, maar toch dommer dan een %s is. ik vind vis %s en patat %s"
+
+[node name="Node3" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "persoon/personen", "insect", "extra insect", "materiaal of grond" )
+story = "“Dus wat vinden %s nou van zo’n zonnetje?”, waarop de %s zijn schouders ophaalde en zowel hij als de %s weer de %s in trokken."
+
+[node name="Node4" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "lichaamsdeel", "eigenschap van geluid", "werkwoord" )
+story = "als je %s slaapt, kun je geen %s meer %s"
+
+[node name="Node5" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "nummer", "dier" )
+story = "beter %s %s in de hand dan geen hand"
+
+[node name="Node6" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "persoon/personen", "persoon/personen" )
+story = "beter een scheet voor %s, dan buikpijn voor jou %s"
+
+[node name="Node7" type="Node" parent="StoryBook"]
+script = ExtResource( 6 )
+info = PoolStringArray( "eigenschap van de wereld", "extra voorwerp" )
+story = "De %s tijd van het leven wordt met %s verprutst"
+[connection signal="text_entered" from="VBoxContainer/HBoxContainer/PlayerInput" to="." method="_on_PlayerInput_text_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
